@@ -1,0 +1,7 @@
+stages:
+  reconcile:
+    - commands:
+      - luet install -y utils/sudo utils/openssh
+      name: "install"
+
+name: "Common packages"

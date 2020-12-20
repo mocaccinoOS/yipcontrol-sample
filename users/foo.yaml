@@ -1,0 +1,34 @@
+stages:
+  reconcile:
+       -  name: "foo"
+          ensure_entities: 
+          - path: /etc/passwd
+            entity: |
+                kind: "user"
+                username: "foo"
+                password: "x"
+                uid: 2000
+                gid: 2000
+                homedir: "/home/foo"
+                shell: "/bin/bash"
+          - path: /etc/group
+            entity: |
+                    kind: "group"
+                    group_name: "foo"
+                    password: "x"
+                    gid: 2000
+                    users: "foo"
+          commands: 
+          - /bin/bash -c "mkdir -p /home/foo/.ssh/ || true"
+          - chmod 755 /home/foo
+          - chmod 700 /home/foo/.ssh
+          - chmod 644 /home/foo/.ssh/authorized_keys
+          - chown -R foo:foo /home/foo
+          files:
+          - path: "/home/foo/.ssh/authorized_keys"
+            owner: 2000
+            group: 2000
+            permission: 644   
+            content: |
+                      ssh-rsa ..... foo@mocaccino.org
+name: "Adding foo"

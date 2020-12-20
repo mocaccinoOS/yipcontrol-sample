@@ -1,0 +1,7 @@
+stages:
+  reconcile:
+       -  name: "standard dirs"
+          commands:
+          - /bin/bash -c "mkdir -p /home || true"
+          - chmod 755 /home
+name: "System dirs"

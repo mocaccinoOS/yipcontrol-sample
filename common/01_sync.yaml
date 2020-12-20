@@ -1,0 +1,7 @@
+stages:
+  reconcile:
+    - commands:
+      - /bin/bash -c "cd /etc/yip.d && git pull"
+      name: "sync"
+
+name: "sync /etc/yip.d"

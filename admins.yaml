@@ -1,0 +1,19 @@
+stages:
+  reconcile:
+  -  name: "groups"
+     ensure_entities: 
+     - path: /etc/group
+       entity: |
+              kind: "group"
+              group_name: "wheel"
+              password: "x"
+              gid: 1020
+              users: "foo"
+     files: 
+     - path: "/etc/sudoers.d/wheel"
+       owner: 0
+       group: 0
+       permission: 600   
+       content: |
+                %wheel ALL=(ALL) NOPASSWD: ALL
+name: "Sudo and super groups"
